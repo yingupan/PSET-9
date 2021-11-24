@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>D3 Transitions</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+ 	
+ 	</style>
+</head>
+
+<body>
+	<!-- Add buttons with IDs -->
+	
+    <button id="firstyear">2015 coffee shops</button>
+    <button id="secondyear">2016 coffee shops</button>
+	<div id="main">
+
+	</div>
+<script type="text/javascript">
+
+	data = [[40,50,60,30],[90,120,10,30],[30,90,80,100],[10,10,100,120],[60,40,40,60]] 
+
+ 	//Width and height
+  	var w = 800;
+  	var h = 600;
+  
+	svg = d3.select("div#main")
+		.append("svg")
+		.attr("width", w)
+		.attr("height", h)
+		.attr("style", "outline: thin solid black;");
+
+	 svg.selectAll("circle")
+		.data(data)	
+		.enter()
+		.append("circle")
+		.attr("cx", function(d, i) {
+                return 100 + i*100;
+                })
+        .attr("cy", 200)
+        .attr("r", function(d) {
+                return d[1]/2.5
+        })
+        .attr("fill", "orange");
+		
+	// Add functions for changing the data when user clicks buttons
+	
+	d3.select("#firstyear").on("click", function() {
+    svg.selectAll("circle")
+    .transition()
+        .attr("r", function(d) {
+            return d[1]/2.5
+        })
+    });
+
+    d3.select("#secondyear").on("click", function() {
+    svg.selectAll("circle")
+    .transition()
+        .attr("r", function(d) {
+            return d[3]/2.5
+        })
+    });
+</script>
+</body>
+</html>
